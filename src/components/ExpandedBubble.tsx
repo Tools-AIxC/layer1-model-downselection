@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { tierConfig, originFlags, type ModelData, type BubblePosition } from "@/data/models";
@@ -13,7 +15,12 @@ export default function ExpandedBubble({
   pos: BubblePosition | null;
   onClose: () => void;
 }) {
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {model && pos && (
         <>
@@ -24,29 +31,26 @@ export default function ExpandedBubble({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-40 bg-black/10"
+            className="fixed inset-0 z-[9998] bg-black/10"
           />
 
-          {/* Expanded card, positioned near the bubble */}
+          {/* Expanded card — centered via inset + margin auto */}
           <motion.div
             key="card"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="expanded-card fixed z-50 max-h-[85vh] w-[520px] overflow-y-auto p-6"
-            style={{
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
+            className="expanded-card fixed inset-0 z-[9999] m-auto max-h-[85vh] w-[520px] overflow-y-auto p-6"
+            style={{ height: "fit-content" }}
             onClick={(e) => e.stopPropagation()}
           >
             <CardContent model={model} onClose={onClose} />
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 
