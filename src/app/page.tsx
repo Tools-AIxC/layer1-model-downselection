@@ -40,6 +40,7 @@ export default function Home() {
           setActiveModel(m);
           if (activeTab === "compare") setActiveTab("overview");
         }}
+        isCompareActive={activeTab === "compare"}
       />
 
       {/* Main content area */}

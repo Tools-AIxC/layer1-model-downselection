@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Zap, Sparkles } from "lucide-react";
 import { type ModelData } from "@/data/models";
-import { DetailSection, DetailSubsection, ContentSubsections } from "./DetailBullets";
+import { DetailSection, DetailSubsection } from "./DetailBullets";
 
 export default function FeaturesTab({ model }: { model: ModelData }) {
   return (
@@ -86,7 +86,7 @@ export default function FeaturesTab({ model }: { model: ModelData }) {
 
       {/* ── Detailed Feature Sections (verbatim) ── */}
       {model.detailed && (
-        <div className="mx-auto max-w-5xl space-y-4">
+        <div className="mx-auto mt-6 max-w-5xl space-y-4">
           <div className="hud-bar rounded" />
 
           <DetailSection title="Text to Video" accent="var(--color-accent-teal)">
@@ -109,7 +109,11 @@ export default function FeaturesTab({ model }: { model: ModelData }) {
             </DetailSection>
           )}
 
-          <ContentSubsections sections={model.detailed.features.additionalSections} />
+          {model.detailed.features.additionalSections?.map((sec, i) => (
+            <DetailSection key={`feat-add-${i}`} title={sec.title}>
+              <DetailSubsection title="" items={sec.items} />
+            </DetailSection>
+          ))}
 
           {/* Further Info — feature-adjacent sections */}
           {model.detailed.furtherInfo.cameraControl && model.detailed.furtherInfo.cameraControl.length > 0 && (
@@ -160,7 +164,11 @@ export default function FeaturesTab({ model }: { model: ModelData }) {
             </DetailSection>
           )}
 
-          <ContentSubsections sections={model.detailed.furtherInfo.additionalSections} />
+          {model.detailed.furtherInfo.additionalSections?.map((sec, i) => (
+            <DetailSection key={`further-add-${i}`} title={sec.title}>
+              <DetailSubsection title="" items={sec.items} />
+            </DetailSection>
+          ))}
         </div>
       )}
     </motion.div>

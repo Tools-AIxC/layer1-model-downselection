@@ -225,11 +225,10 @@ function DataRow({
 }
 
 function QuickStat({ label, value }: { label: string; value: string }) {
-  const display = value.length > 30 ? value.slice(0, 30) + "..." : value;
   return (
     <div className="panel rounded-lg px-4 py-3">
       <div className="data-label mb-1">{label}</div>
-      <div className="text-sm font-medium text-[var(--color-ink)]">{display}</div>
+      <div className="text-sm font-medium text-[var(--color-ink)] leading-snug">{value}</div>
     </div>
   );
 }

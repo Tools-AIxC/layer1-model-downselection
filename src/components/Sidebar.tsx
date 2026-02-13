@@ -9,9 +9,11 @@ const tierOrder: Tier[] = ["tier1", "tier2", "tier3"];
 export default function Sidebar({
   activeId,
   onSelect,
+  isCompareActive = false,
 }: {
   activeId: string;
   onSelect: (m: ModelData) => void;
+  isCompareActive?: boolean;
 }) {
   return (
     <aside className="flex h-full w-64 flex-col border-r border-[var(--color-border)] bg-[var(--color-panel)]">
@@ -32,8 +34,20 @@ export default function Sidebar({
 
       <div className="hud-bar" />
 
+      {/* Compare mode indicator */}
+      {isCompareActive && (
+        <div className="mx-3 mt-2 rounded bg-[var(--color-accent-indigo)]/10 px-3 py-2 text-center">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-accent-indigo)]">
+            Comparing All Models
+          </span>
+          <p className="mt-0.5 text-[10px] text-[var(--color-ink-faint)]">
+            Select a model to view details
+          </p>
+        </div>
+      )}
+
       {/* Model list */}
-      <div className="flex-1 overflow-y-auto py-2">
+      <div className={`flex-1 overflow-y-auto py-2 ${isCompareActive ? "opacity-60" : ""}`}>
         {tierOrder.map((tier) => {
           const config = tierConfig[tier];
           const tierModels = models.filter((m) => m.tier === tier);
