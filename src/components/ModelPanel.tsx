@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import type { ModelData } from "@/data/models";
+import type { ModelData, BulletItem, ContentSubsection } from "@/data/models";
 import { tierConfig, originFlags, cinematicConfig } from "@/data/models";
 
 export default function ModelPanel({
@@ -158,6 +158,106 @@ export default function ModelPanel({
                 </li>
               ))}
             </ul>
+
+            {/* ═══ DETAILED CONTENT (verbatim Miro/Notion data) ═══ */}
+            <div className="mt-6 border-t border-white/[0.06] pt-6">
+              {/* ── Company Info ── */}
+              {model.detailed.companyInfo.additionalInfo && model.detailed.companyInfo.additionalInfo.length > 0 && (
+                <DetailSection title="Company Info" glow={config.accentGlow}>
+                  <p className="text-xs text-white/35 mb-1"><strong className="text-white/50">Company:</strong> {model.company}</p>
+                  <p className="text-xs text-white/35 mb-1"><strong className="text-white/50">Location:</strong> {model.city}</p>
+                  <p className="text-xs text-white/35 mb-1"><strong className="text-white/50">Size:</strong> {model.employees}</p>
+                  <p className="text-xs text-white/35 mb-1"><strong className="text-white/50">Latest Release:</strong> {model.releaseDate}</p>
+                  <DetailBullets items={model.detailed.companyInfo.additionalInfo.map(t => ({ text: t }))} />
+                </DetailSection>
+              )}
+
+              {/* ── Model Info ── */}
+              <DetailSection title="Model Info" glow={config.accentGlow}>
+                <DetailSubsection title="Advertised Focus / Specialisations" items={model.detailed.modelInfo.advertisedFocus} glow={config.accentGlow} />
+                <DetailSubsection title="Advertised Resolutions" items={model.detailed.modelInfo.advertisedResolutions} glow={config.accentGlow} />
+                <DetailSubsection title="Aspect Ratios" items={model.detailed.modelInfo.aspectRatios} glow={config.accentGlow} />
+                <DetailSubsection title="Maximum Clip Length" items={model.detailed.modelInfo.maxClipLength} glow={config.accentGlow} />
+                {model.detailed.modelInfo.colourspaceBitDepth && (
+                  <DetailSubsection title="Colourspace / Bit Depth" items={model.detailed.modelInfo.colourspaceBitDepth} glow={config.accentGlow} />
+                )}
+                {model.detailed.modelInfo.processingSpeed && (
+                  <DetailSubsection title="Processing Speed" items={model.detailed.modelInfo.processingSpeed} glow={config.accentGlow} />
+                )}
+                {model.detailed.modelInfo.frameRate && (
+                  <DetailSubsection title="Frame Rate" items={model.detailed.modelInfo.frameRate} glow={config.accentGlow} />
+                )}
+              </DetailSection>
+
+              {/* ── Key Features / Functionality ── */}
+              <DetailSection title="Key Features / Functionality" glow={config.accentGlow}>
+                <DetailSubsection title="Text to Video" items={model.detailed.features.textToVideo} glow={config.accentGlow} />
+                <DetailSubsection title="Keyframe Support (Startframe + Endframe)" items={model.detailed.features.keyframeSupport} glow={config.accentGlow} />
+                {model.detailed.features.ingredientsToVideo.length > 0 && (
+                  <DetailSubsection title="'Ingredients' to Video" items={model.detailed.features.ingredientsToVideo} glow={config.accentGlow} />
+                )}
+                {model.detailed.features.videoEditing.length > 0 && (
+                  <DetailSubsection title="Video Editing" items={model.detailed.features.videoEditing} glow={config.accentGlow} />
+                )}
+                {model.detailed.features.additionalSections?.map((s) => (
+                  <DetailSubsection key={s.title} title={s.title} items={s.items} glow={config.accentGlow} />
+                ))}
+              </DetailSection>
+
+              {/* ── Further Information ── */}
+              {Object.keys(model.detailed.furtherInfo).length > 0 && (
+                <DetailSection title="Further Information" glow={config.accentGlow}>
+                  {model.detailed.furtherInfo.cameraControl && (
+                    <DetailSubsection title="Camera Control" items={model.detailed.furtherInfo.cameraControl} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.physicsAndMotion && (
+                    <DetailSubsection title="Physics & Motion" items={model.detailed.furtherInfo.physicsAndMotion} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.characterFeatures && (
+                    <DetailSubsection title="Character Features" items={model.detailed.furtherInfo.characterFeatures} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.audioFeatures && (
+                    <DetailSubsection title="Audio Features" items={model.detailed.furtherInfo.audioFeatures} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.safetyProvenance && (
+                    <DetailSubsection title="Safety & Provenance" items={model.detailed.furtherInfo.safetyProvenance} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.platformAvailability && (
+                    <DetailSubsection title="Platform Availability" items={model.detailed.furtherInfo.platformAvailability} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.regionalAvailability && (
+                    <DetailSubsection title="Regional Availability" items={model.detailed.furtherInfo.regionalAvailability} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.pricingModel && (
+                    <DetailSubsection title="Pricing Model" items={model.detailed.furtherInfo.pricingModel} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.dataAndTraining && (
+                    <DetailSubsection title="Data & Training" items={model.detailed.furtherInfo.dataAndTraining} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.architectureTraining && (
+                    <DetailSubsection title="Architecture & Training" items={model.detailed.furtherInfo.architectureTraining} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.videoSuperResolution && (
+                    <DetailSubsection title="Video Super-Resolution" items={model.detailed.furtherInfo.videoSuperResolution} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.systemRequirements && (
+                    <DetailSubsection title="System Requirements" items={model.detailed.furtherInfo.systemRequirements} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.notableAchievements && (
+                    <DetailSubsection title="Notable Achievements" items={model.detailed.furtherInfo.notableAchievements} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.equipmentFootage && (
+                    <DetailSubsection title="Equipment / Footage" items={model.detailed.furtherInfo.equipmentFootage} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.limitations && (
+                    <DetailSubsection title="Detailed Limitations" items={model.detailed.furtherInfo.limitations} glow={config.accentGlow} />
+                  )}
+                  {model.detailed.furtherInfo.additionalSections?.map((s) => (
+                    <DetailSubsection key={s.title} title={s.title} items={s.items} glow={config.accentGlow} />
+                  ))}
+                </DetailSection>
+              )}
+            </div>
           </motion.div>
         </div>
 
@@ -257,5 +357,56 @@ function Spec({ label, value, glow }: { label: string; value: string; glow: stri
       <p className="spec-label">{label}</p>
       <p className="spec-value" style={{ color: `${glow}bb` }}>{value}</p>
     </div>
+  );
+}
+
+/* ── Detailed content helper components ── */
+
+function DetailSection({ title, glow, children }: { title: string; glow: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-6">
+      <h3
+        className="mb-3 text-xs font-bold uppercase tracking-[0.12em]"
+        style={{ color: `${glow}99` }}
+      >
+        {title}
+      </h3>
+      {children}
+    </div>
+  );
+}
+
+function DetailSubsection({ title, items, glow }: { title: string; items: BulletItem[]; glow: string }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div className="mb-3">
+      <h4 className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-white/30">
+        {title}
+      </h4>
+      <DetailBullets items={items} />
+    </div>
+  );
+}
+
+function DetailBullets({ items }: { items: BulletItem[] }) {
+  return (
+    <ul className="space-y-1">
+      {items.map((item, i) => (
+        <li key={i} className="text-xs text-white/40">
+          <span className="mr-1.5 text-white/15">-</span>
+          {item.text}
+          {item.subItems && item.subItems.length > 0 && (
+            <ul className="ml-4 mt-0.5 space-y-0.5">
+              {item.subItems.map((sub, j) => (
+                <li key={j} className="text-[11px] text-white/25">
+                  <span className="mr-1 text-white/10">-</span>
+                  {sub}
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }

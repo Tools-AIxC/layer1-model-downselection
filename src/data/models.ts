@@ -1,3 +1,5 @@
+import { modelDetails } from "./modelDetails";
+
 export type Tier = "tier1" | "tier2" | "tier3";
 export type Origin = "USA" | "China" | "Israel";
 
@@ -19,6 +21,66 @@ export interface PricingInfo {
   apiPricing?: string;
 }
 
+/* ── Detailed content interfaces (verbatim Miro/Notion data) ── */
+export interface BulletItem {
+  text: string;
+  subItems?: string[];
+}
+
+export interface ContentSubsection {
+  title: string;
+  items: BulletItem[];
+}
+
+export interface DetailedCompanyInfo {
+  additionalInfo?: string[];
+}
+
+export interface DetailedModelInfo {
+  advertisedFocus: BulletItem[];
+  advertisedResolutions: BulletItem[];
+  aspectRatios: BulletItem[];
+  maxClipLength: BulletItem[];
+  colourspaceBitDepth?: BulletItem[];
+  processingSpeed?: BulletItem[];
+  frameRate?: BulletItem[];
+}
+
+export interface DetailedFeatures {
+  textToVideo: BulletItem[];
+  keyframeSupport: BulletItem[];
+  ingredientsToVideo: BulletItem[];
+  videoEditing: BulletItem[];
+  additionalSections?: ContentSubsection[];
+}
+
+export interface DetailedFurtherInfo {
+  cameraControl?: BulletItem[];
+  physicsAndMotion?: BulletItem[];
+  characterFeatures?: BulletItem[];
+  audioFeatures?: BulletItem[];
+  platformAvailability?: BulletItem[];
+  pricingModel?: BulletItem[];
+  dataAndTraining?: BulletItem[];
+  limitations?: BulletItem[];
+  notableAchievements?: BulletItem[];
+  equipmentFootage?: BulletItem[];
+  safetyProvenance?: BulletItem[];
+  regionalAvailability?: BulletItem[];
+  videoSuperResolution?: BulletItem[];
+  architectureTraining?: BulletItem[];
+  systemRequirements?: BulletItem[];
+  additionalSections?: ContentSubsection[];
+}
+
+export interface DetailedContent {
+  subtitle?: string;
+  companyInfo: DetailedCompanyInfo;
+  modelInfo: DetailedModelInfo;
+  features: DetailedFeatures;
+  furtherInfo: DetailedFurtherInfo;
+}
+
 export interface ModelData {
   id: string;
   name: string;
@@ -37,6 +99,7 @@ export interface ModelData {
   availability: string;
   limitations: string[];
   highlight: string;
+  detailed: DetailedContent;
 }
 
 /* ── Tier config ── */
@@ -180,6 +243,7 @@ export const models: ModelData[] = [
     availability: "Global via Google platforms",
     limitations: ["Premium pricing", "Ecosystem lock-in"],
     highlight: "Highest resolution (4K) & longest sequences (140s)",
+    detailed: modelDetails.veo,
   },
   {
     id: "runway", name: "Runway", version: "4.5", company: "Runway AI", country: "USA",
@@ -192,6 +256,7 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["10s max clip length", "Credit-based system"],
     highlight: "Best cinematic controls for professional filmmakers",
+    detailed: modelDetails.runway,
   },
   {
     id: "kling", name: "Kling", version: "3.0 / 2.6 / 2.5", company: "Kuaishou Technology", country: "China",
@@ -204,6 +269,7 @@ export const models: ModelData[] = [
     availability: "Global access",
     limitations: ["End-frame targeting limited/experimental", "HDR not confirmed"],
     highlight: "Best free tier (66 daily credits) with strong motion control",
+    detailed: modelDetails.kling,
   },
   {
     id: "sora", name: "Sora", version: "2", company: "OpenAI", country: "USA",
@@ -216,6 +282,7 @@ export const models: ModelData[] = [
     availability: "Regional: US, Canada, Japan, South Korea, Taiwan, Thailand, Vietnam, Argentina, Mexico, Chile, Colombia",
     limitations: ["Not globally available \u2014 regional restrictions", "Physics simulation has occasional artifacts", "Character consistency drifts in complex scenes", "Text rendering ~80% accurate for simple words", "Watermark on all videos (C2PA metadata)"],
     highlight: "Disney partnership (200+ characters) & best audio sync",
+    detailed: modelDetails.sora,
   },
   {
     id: "luma", name: "Luma Ray", version: "3.14 / Modify Video", company: "Luma AI (Luma Labs)", country: "USA",
@@ -228,6 +295,7 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["End frame experimental/limited", "Multi-image composition limited", "HDR not confirmed for production"],
     highlight: "Best image-to-video quality & widest aspect ratio support",
+    detailed: modelDetails.luma,
   },
   {
     id: "ltx", name: "LTX Pro", version: "1.0", company: "Lightricks", country: "Israel",
@@ -240,6 +308,7 @@ export const models: ModelData[] = [
     availability: "Global (open source)",
     limitations: ["Low native resolution (768\u00d7512)", "No 4K upscaling", "5-second max clip length", "Not highest realism \u2014 trade-off for speed"],
     highlight: "Fastest open-source model, runs on consumer GPUs",
+    detailed: modelDetails.ltx,
   },
   {
     id: "pixverse", name: "Pixverse", version: "V5.6", company: "PixVerse", country: "USA",
@@ -252,6 +321,7 @@ export const models: ModelData[] = [
     availability: "Web, iOS, Android, API integrations",
     limitations: ["Short clip durations", "4K limited to 5 seconds", "Pro Max required for multi-character & 4K", "Some generation artifacts"],
     highlight: "Multi-character LoRA system & native 4K (first in industry)",
+    detailed: modelDetails.pixverse,
   },
   {
     id: "minimax", name: "MiniMax Hailuo", version: "2.3 / I2V-01-Live", company: "MiniMax", country: "China",
@@ -264,6 +334,7 @@ export const models: ModelData[] = [
     availability: "Website, mobile apps, third-party integrations",
     limitations: ["Short clip duration", "Last-frame conditioning only in legacy Hailuo 02", "Reduced keyframe functionality in newer versions"],
     highlight: "Media Agent conversational creation & 2D illustration animation",
+    detailed: modelDetails.minimax,
   },
   {
     id: "hunyuan", name: "Tencent Hunyuan", version: "1.5", company: "Tencent", country: "China",
@@ -276,6 +347,7 @@ export const models: ModelData[] = [
     availability: "Open source, Tencent Cloud API (testing), third-party platforms",
     limitations: ["High VRAM requirements (24\u201345 GB)", "1080p requires super-resolution step", "Complex setup without platform integration", "10s max clip duration (v1.5)"],
     highlight: "Largest open-source model (8.3B params) with full pipeline",
+    detailed: modelDetails.hunyuan,
   },
   {
     id: "wan", name: "Wan", version: "2.6", company: "Alibaba Cloud (Tongyi)", country: "China",
@@ -288,6 +360,7 @@ export const models: ModelData[] = [
     availability: "Alibaba Cloud ecosystem",
     limitations: ["Less creative/artistic than competitors", "Limited end frame targeting", "No advanced inpainting", "Not a true multi-ingredient system", "Template-based approach"],
     highlight: "Best for e-commerce & product video generation",
+    detailed: modelDetails.wan,
   },
   {
     id: "seedance", name: "Seedance Pro", version: "1.5", company: "ByteDance", country: "China",
@@ -300,5 +373,6 @@ export const models: ModelData[] = [
     availability: "Via ByteDance platforms (TikTok/CapCut ecosystem)",
     limitations: ["Slow processing (up to 10 min HQ)", "ByteDance ecosystem dependency", "Some features Pro-exclusive"],
     highlight: "Best keyframe interpolation quality (ByteDance/TikTok infrastructure)",
+    detailed: modelDetails.seedance,
   },
 ];
