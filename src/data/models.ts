@@ -39,43 +39,11 @@ export interface ModelData {
   highlight: string;
 }
 
-/* ── Cinematic palette per tier ── */
-export const tierConfig: Record<Tier, {
-  label: string;
-  bg: string;         // deep section background
-  bgAlt: string;      // lighter accent background
-  accent: string;     // neon/glow accent
-  text: string;       // primary text color
-  textMuted: string;  // muted text
-  icon: string;       // tier icon
-}> = {
-  tier1: {
-    label: "Must Try",
-    bg: "#0a0f1e",
-    bgAlt: "#101832",
-    accent: "#3b82f6",
-    text: "#e0eaff",
-    textMuted: "#64748b",
-    icon: "◆",
-  },
-  tier2: {
-    label: "Worth Considering",
-    bg: "#0f1a0a",
-    bgAlt: "#162210",
-    accent: "#f59e0b",
-    text: "#fef3c7",
-    textMuted: "#6b7f5a",
-    icon: "●",
-  },
-  tier3: {
-    label: "Probably Skip",
-    bg: "#1a0a14",
-    bgAlt: "#22101a",
-    accent: "#a855f7",
-    text: "#f3e8ff",
-    textMuted: "#7c6b86",
-    icon: "▲",
-  },
+/* ── Tier config ── */
+export const tierConfig: Record<Tier, { label: string; accent: string; icon: string }> = {
+  tier1: { label: "Must Try", accent: "#3b82f6", icon: "◆" },
+  tier2: { label: "Worth Considering", accent: "#f59e0b", icon: "●" },
+  tier3: { label: "Probably Skip", accent: "#a855f7", icon: "▲" },
 };
 
 export const originFlags: Record<Origin, string> = {
@@ -84,26 +52,93 @@ export const originFlags: Record<Origin, string> = {
   Israel: "\u{1F1EE}\u{1F1F1}",
 };
 
-/* ── Cinematic section config per model ── */
+/* ── Cinematic config per model ── */
 export interface CinematicConfig {
-  bgGradient: string;          // CSS gradient for the section background
-  accentGlow: string;          // glow color for neon effects
-  parallaxSpeed: number;       // multiplier for parallax offset (0.3–1.5)
-  tagline: string;             // short cinematic tagline
+  bgGradient: string;
+  accentGlow: string;
+  tagline: string;
+  youtubeIds: string[];       // YouTube video IDs from Miro board
+  youtubeTitles: string[];    // titles for the videos
 }
 
 export const cinematicConfig: Record<string, CinematicConfig> = {
-  veo:       { bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #0d1b3e 50%, #071428 100%)", accentGlow: "#3b82f6", parallaxSpeed: 0.4, tagline: "The Resolution King" },
-  runway:    { bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #1a0d2e 50%, #0d0721 100%)", accentGlow: "#8b5cf6", parallaxSpeed: 0.6, tagline: "Filmmaker's Weapon" },
-  kling:     { bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #0a1f1f 50%, #071414 100%)", accentGlow: "#10b981", parallaxSpeed: 0.5, tagline: "The Motion Master" },
-  sora:      { bgGradient: "linear-gradient(135deg, #1a0a14 0%, #2a0a1e 50%, #140714 100%)", accentGlow: "#ec4899", parallaxSpeed: 0.35, tagline: "Disney's Co-Pilot" },
-  luma:      { bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #0a1a2e 50%, #051422 100%)", accentGlow: "#06b6d4", parallaxSpeed: 0.55, tagline: "Photorealism Pioneer" },
-  ltx:       { bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #1a1f0a 50%, #0f140a 100%)", accentGlow: "#eab308", parallaxSpeed: 0.7, tagline: "Open-Source Speed Demon" },
-  pixverse:  { bgGradient: "linear-gradient(135deg, #1a0a0a 0%, #2a1414 50%, #140a0a 100%)", accentGlow: "#ef4444", parallaxSpeed: 0.65, tagline: "Multi-Character Maestro" },
-  minimax:   { bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #141e32 50%, #0a1422 100%)", accentGlow: "#6366f1", parallaxSpeed: 0.45, tagline: "The Conversationalist" },
-  hunyuan:   { bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #0a1e14 50%, #071410 100%)", accentGlow: "#22c55e", parallaxSpeed: 0.5, tagline: "Open-Source Giant" },
-  wan:       { bgGradient: "linear-gradient(135deg, #1a0a14 0%, #1e0a1e 50%, #140a14 100%)", accentGlow: "#d946ef", parallaxSpeed: 0.6, tagline: "E-Commerce Engine" },
-  seedance:  { bgGradient: "linear-gradient(135deg, #0a0a1a 0%, #14142a 50%, #0a0a14 100%)", accentGlow: "#a78bfa", parallaxSpeed: 0.55, tagline: "Keyframe Interpolator" },
+  veo: {
+    bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #0d1b3e 50%, #071428 100%)",
+    accentGlow: "#3b82f6",
+    tagline: "The Resolution King",
+    youtubeIds: ["B78BJuPxmBU", "ZFh6gVarloc", "eNe4UZ3XGeo", "Bk-4gHuuK80"],
+    youtubeTitles: ["Veo 3.1 — Artistic Control in Flow", "Veo 3.1 — Frames to Video", "NanoBanana Short Film", "Veo 3.1 on Artlist"],
+  },
+  runway: {
+    bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #1a0d2e 50%, #0d0721 100%)",
+    accentGlow: "#8b5cf6",
+    tagline: "Filmmaker's Weapon",
+    youtubeIds: ["AwKSrJFvdps", "I4DXMWWSDeM"],
+    youtubeTitles: ["Gen-4.5 Image to Video", "Move with Gen-4.5"],
+  },
+  kling: {
+    bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #0a1f1f 50%, #071414 100%)",
+    accentGlow: "#10b981",
+    tagline: "The Motion Master",
+    youtubeIds: ["XD_7FNPhZQY", "krOgBXl1cKw", "FGRvymY_9tY"],
+    youtubeTitles: ["Kling 3.0 — Everyone a Director", "Kling 2.6 — Synced Audio", "Kling 2.5 — Cinematic Quality"],
+  },
+  sora: {
+    bgGradient: "linear-gradient(135deg, #1a0a14 0%, #2a0a1e 50%, #140714 100%)",
+    accentGlow: "#ec4899",
+    tagline: "Disney's Co-Pilot",
+    youtubeIds: [],
+    youtubeTitles: [],
+  },
+  luma: {
+    bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #0a1a2e 50%, #051422 100%)",
+    accentGlow: "#06b6d4",
+    tagline: "Photorealism Pioneer",
+    youtubeIds: ["w7ZCcWsx5bU", "ALaZRpmgCbo", "oxBaihKTiLE", "bVvRi6ZfIrs"],
+    youtubeTitles: ["Introducing Ray3.14", "VFX with Ray 3.14 Modify", "Ray3 Modify Walkthrough", "Captain of Expression"],
+  },
+  ltx: {
+    bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #1a1f0a 50%, #0f140a 100%)",
+    accentGlow: "#eab308",
+    tagline: "Open-Source Speed Demon",
+    youtubeIds: ["KRJW3yXwJdY", "nKeCnvsYN3c"],
+    youtubeTitles: ["Introducing LTX-2", "LTX-2 Video Models Explained"],
+  },
+  pixverse: {
+    bgGradient: "linear-gradient(135deg, #1a0a0a 0%, #2a1414 50%, #140a0a 100%)",
+    accentGlow: "#ef4444",
+    tagline: "Multi-Character Maestro",
+    youtubeIds: [],
+    youtubeTitles: [],
+  },
+  minimax: {
+    bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #141e32 50%, #0a1422 100%)",
+    accentGlow: "#6366f1",
+    tagline: "The Conversationalist",
+    youtubeIds: [],
+    youtubeTitles: [],
+  },
+  hunyuan: {
+    bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #0a1e14 50%, #071410 100%)",
+    accentGlow: "#22c55e",
+    tagline: "Open-Source Giant",
+    youtubeIds: [],
+    youtubeTitles: [],
+  },
+  wan: {
+    bgGradient: "linear-gradient(135deg, #1a0a14 0%, #1e0a1e 50%, #140a14 100%)",
+    accentGlow: "#d946ef",
+    tagline: "E-Commerce Engine",
+    youtubeIds: ["moFwdfQOGMM", "Y9q5p2M6kQk", "uV5wdDG7ngE"],
+    youtubeTitles: ["Wan 2.6 — Multishot Clips", "Cinematic AI Videos", "15s Scenes From One Prompt"],
+  },
+  seedance: {
+    bgGradient: "linear-gradient(135deg, #0a0a1a 0%, #14142a 50%, #0a0a14 100%)",
+    accentGlow: "#a78bfa",
+    tagline: "Keyframe Interpolator",
+    youtubeIds: ["0XbXMXOGLKs", "ACBJfGiC66A"],
+    youtubeTitles: ["The Last Cell — Short Film", "Hollywood-Level Audio & Video"],
+  },
 };
 
 export const models: ModelData[] = [
