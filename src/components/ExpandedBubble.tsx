@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { tierConfig, originFlags, type ModelData, type BubblePosition } from "@/data/models";
+import { tierConfig, originFlags, type ModelData, type BubblePosition, type BulletItem, type ContentSubsection } from "@/data/models";
 
 export default function ExpandedBubble({
   model,
@@ -220,6 +220,102 @@ function CardContent({ model, onClose }: { model: ModelData; onClose: () => void
           </li>
         ))}
       </ul>
+
+      {/* ── Detailed Verbatim Content (Miro/Notion) ── */}
+      {model.detailed && (
+        <>
+          <div className="wavy-sep my-4" />
+
+          {/* Additional Company Info */}
+          {model.detailed.companyInfo.additionalInfo && model.detailed.companyInfo.additionalInfo.length > 0 && (
+            <GardenSection title="Additional Company Info">
+              <GardenBullets items={model.detailed.companyInfo.additionalInfo.map(t => ({ text: t }))} />
+            </GardenSection>
+          )}
+
+          {/* Model Info */}
+          <GardenSection title="Model Info">
+            <GardenSubsection title="Advertised Focus" items={model.detailed.modelInfo.advertisedFocus} />
+            <GardenSubsection title="Advertised Resolutions" items={model.detailed.modelInfo.advertisedResolutions} />
+            <GardenSubsection title="Aspect Ratios" items={model.detailed.modelInfo.aspectRatios} />
+            <GardenSubsection title="Maximum Clip Length" items={model.detailed.modelInfo.maxClipLength} />
+            <GardenSubsection title="Colourspace / Bit Depth" items={model.detailed.modelInfo.colourspaceBitDepth ?? []} />
+            <GardenSubsection title="Processing Speed" items={model.detailed.modelInfo.processingSpeed ?? []} />
+            <GardenSubsection title="Frame Rate" items={model.detailed.modelInfo.frameRate ?? []} />
+          </GardenSection>
+
+          <div className="wavy-sep my-4" />
+
+          {/* Features */}
+          <GardenSection title="Key Features / Functionality">
+            <GardenSubsection title="Text to Video" items={model.detailed.features.textToVideo} />
+            <GardenSubsection title="Keyframe Support" items={model.detailed.features.keyframeSupport} />
+            {model.detailed.features.ingredientsToVideo.length > 0 && (
+              <GardenSubsection title="Ingredients to Video" items={model.detailed.features.ingredientsToVideo} />
+            )}
+            {model.detailed.features.videoEditing.length > 0 && (
+              <GardenSubsection title="Video Editing" items={model.detailed.features.videoEditing} />
+            )}
+            {model.detailed.features.additionalSections?.map((sec, i) => (
+              <GardenSubsection key={i} title={sec.title} items={sec.items} />
+            ))}
+          </GardenSection>
+
+          <div className="wavy-sep my-4" />
+
+          {/* Further Information */}
+          <GardenSection title="Further Information">
+            {model.detailed.furtherInfo.cameraControl && model.detailed.furtherInfo.cameraControl.length > 0 && (
+              <GardenSubsection title="Camera Control" items={model.detailed.furtherInfo.cameraControl} />
+            )}
+            {model.detailed.furtherInfo.physicsAndMotion && model.detailed.furtherInfo.physicsAndMotion.length > 0 && (
+              <GardenSubsection title="Physics & Motion" items={model.detailed.furtherInfo.physicsAndMotion} />
+            )}
+            {model.detailed.furtherInfo.characterFeatures && model.detailed.furtherInfo.characterFeatures.length > 0 && (
+              <GardenSubsection title="Character Features" items={model.detailed.furtherInfo.characterFeatures} />
+            )}
+            {model.detailed.furtherInfo.audioFeatures && model.detailed.furtherInfo.audioFeatures.length > 0 && (
+              <GardenSubsection title="Audio Features" items={model.detailed.furtherInfo.audioFeatures} />
+            )}
+            {model.detailed.furtherInfo.platformAvailability && model.detailed.furtherInfo.platformAvailability.length > 0 && (
+              <GardenSubsection title="Platform Availability" items={model.detailed.furtherInfo.platformAvailability} />
+            )}
+            {model.detailed.furtherInfo.pricingModel && model.detailed.furtherInfo.pricingModel.length > 0 && (
+              <GardenSubsection title="Pricing Model" items={model.detailed.furtherInfo.pricingModel} />
+            )}
+            {model.detailed.furtherInfo.regionalAvailability && model.detailed.furtherInfo.regionalAvailability.length > 0 && (
+              <GardenSubsection title="Regional Availability" items={model.detailed.furtherInfo.regionalAvailability} />
+            )}
+            {model.detailed.furtherInfo.safetyProvenance && model.detailed.furtherInfo.safetyProvenance.length > 0 && (
+              <GardenSubsection title="Safety & Provenance" items={model.detailed.furtherInfo.safetyProvenance} />
+            )}
+            {model.detailed.furtherInfo.architectureTraining && model.detailed.furtherInfo.architectureTraining.length > 0 && (
+              <GardenSubsection title="Architecture & Training" items={model.detailed.furtherInfo.architectureTraining} />
+            )}
+            {model.detailed.furtherInfo.dataAndTraining && model.detailed.furtherInfo.dataAndTraining.length > 0 && (
+              <GardenSubsection title="Data & Training" items={model.detailed.furtherInfo.dataAndTraining} />
+            )}
+            {model.detailed.furtherInfo.videoSuperResolution && model.detailed.furtherInfo.videoSuperResolution.length > 0 && (
+              <GardenSubsection title="Video Super-Resolution" items={model.detailed.furtherInfo.videoSuperResolution} />
+            )}
+            {model.detailed.furtherInfo.systemRequirements && model.detailed.furtherInfo.systemRequirements.length > 0 && (
+              <GardenSubsection title="System Requirements" items={model.detailed.furtherInfo.systemRequirements} />
+            )}
+            {model.detailed.furtherInfo.notableAchievements && model.detailed.furtherInfo.notableAchievements.length > 0 && (
+              <GardenSubsection title="Notable Achievements" items={model.detailed.furtherInfo.notableAchievements} />
+            )}
+            {model.detailed.furtherInfo.equipmentFootage && model.detailed.furtherInfo.equipmentFootage.length > 0 && (
+              <GardenSubsection title="Equipment / Footage" items={model.detailed.furtherInfo.equipmentFootage} />
+            )}
+            {model.detailed.furtherInfo.limitations && model.detailed.furtherInfo.limitations.length > 0 && (
+              <GardenSubsection title="Detailed Limitations" items={model.detailed.furtherInfo.limitations} />
+            )}
+            {model.detailed.furtherInfo.additionalSections?.map((sec, i) => (
+              <GardenSubsection key={i} title={sec.title} items={sec.items} />
+            ))}
+          </GardenSection>
+        </>
+      )}
     </>
   );
 }
@@ -240,6 +336,56 @@ function PriceBox({ label, value, emoji }: { label: string; value: string; emoji
         {emoji} {label}
       </p>
       <p className="mt-1 text-sm font-medium text-gray-700">{value}</p>
+    </div>
+  );
+}
+
+/* ── Garden-themed detail renderers ── */
+
+function GardenBullets({ items }: { items: BulletItem[] }) {
+  return (
+    <ul className="space-y-1.5">
+      {items.map((item, i) => (
+        <li key={i}>
+          <div className="flex items-start gap-2 text-sm text-gray-600">
+            <span className="mt-1.5 text-xs text-rose-400">&bull;</span>
+            <span>{item.text}</span>
+          </div>
+          {item.subItems && item.subItems.length > 0 && (
+            <ul className="ml-5 mt-1 space-y-1">
+              {item.subItems.map((sub, j) => (
+                <li key={j} className="flex items-start gap-2 text-xs text-gray-500">
+                  <span className="mt-1 text-[10px] text-rose-300">&#9702;</span>
+                  <span>{sub}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function GardenSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-4">
+      <h3 className="sketchy-underline mb-3 inline-block text-xs font-bold uppercase tracking-wider text-gray-500">
+        {title}
+      </h3>
+      <div className="space-y-3">{children}</div>
+    </div>
+  );
+}
+
+function GardenSubsection({ title, items }: { title: string; items: BulletItem[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div className="rounded-xl bg-gray-50/60 px-4 py-3 border border-gray-100">
+      <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
+        {title}
+      </p>
+      <GardenBullets items={items} />
     </div>
   );
 }

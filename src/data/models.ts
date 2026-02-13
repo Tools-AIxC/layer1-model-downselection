@@ -1,3 +1,5 @@
+import { modelDetails } from "./modelDetails";
+
 export type Tier = "tier1" | "tier2" | "tier3";
 export type Origin = "USA" | "China" | "Israel";
 
@@ -17,6 +19,66 @@ export interface PricingInfo {
   paidPlans: string;
   perGeneration?: string;
   apiPricing?: string;
+}
+
+/* ── Detailed content interfaces (verbatim Miro/Notion data) ── */
+export interface BulletItem {
+  text: string;
+  subItems?: string[];
+}
+
+export interface ContentSubsection {
+  title: string;
+  items: BulletItem[];
+}
+
+export interface DetailedCompanyInfo {
+  additionalInfo?: string[];
+}
+
+export interface DetailedModelInfo {
+  advertisedFocus: BulletItem[];
+  advertisedResolutions: BulletItem[];
+  aspectRatios: BulletItem[];
+  maxClipLength: BulletItem[];
+  colourspaceBitDepth?: BulletItem[];
+  processingSpeed?: BulletItem[];
+  frameRate?: BulletItem[];
+}
+
+export interface DetailedFeatures {
+  textToVideo: BulletItem[];
+  keyframeSupport: BulletItem[];
+  ingredientsToVideo: BulletItem[];
+  videoEditing: BulletItem[];
+  additionalSections?: ContentSubsection[];
+}
+
+export interface DetailedFurtherInfo {
+  cameraControl?: BulletItem[];
+  physicsAndMotion?: BulletItem[];
+  characterFeatures?: BulletItem[];
+  audioFeatures?: BulletItem[];
+  platformAvailability?: BulletItem[];
+  pricingModel?: BulletItem[];
+  dataAndTraining?: BulletItem[];
+  limitations?: BulletItem[];
+  notableAchievements?: BulletItem[];
+  equipmentFootage?: BulletItem[];
+  safetyProvenance?: BulletItem[];
+  regionalAvailability?: BulletItem[];
+  videoSuperResolution?: BulletItem[];
+  architectureTraining?: BulletItem[];
+  systemRequirements?: BulletItem[];
+  additionalSections?: ContentSubsection[];
+}
+
+export interface DetailedContent {
+  subtitle?: string;
+  companyInfo: DetailedCompanyInfo;
+  modelInfo: DetailedModelInfo;
+  features: DetailedFeatures;
+  furtherInfo: DetailedFurtherInfo;
 }
 
 export interface ModelData {
@@ -40,6 +102,7 @@ export interface ModelData {
   youtubeIds?: string[];
   youtubeTitles?: string[];
   localVideos?: { src: string; title: string }[];
+  detailed: DetailedContent;
 }
 
 const VIDEO_CDN = "https://github.com/Tools-AIxC/layer1-model-downselection/releases/download/v1.0-videos";
@@ -99,6 +162,7 @@ export const models: ModelData[] = [
     availability: "Global via Google platforms",
     limitations: ["Premium pricing", "Ecosystem lock-in"],
     highlight: "Highest resolution (4K) & longest sequences (140s)",
+    detailed: modelDetails.veo,
     youtubeIds: ["B78BJuPxmBU", "ZFh6gVarloc", "eNe4UZ3XGeo"],
     youtubeTitles: ["Veo 3.1 — Artistic Control in Flow", "Veo 3.1 — Frames to Video", "NanoBanana Short Film"],
   },
@@ -113,6 +177,7 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["10s max clip length", "Credit-based system"],
     highlight: "Best cinematic controls for professional filmmakers",
+    detailed: modelDetails.runway,
     youtubeIds: ["AwKSrJFvdps", "I4DXMWWSDeM"],
     youtubeTitles: ["Gen-4.5 Image to Video", "Move with Gen-4.5"],
   },
@@ -127,6 +192,7 @@ export const models: ModelData[] = [
     availability: "Global access",
     limitations: ["End-frame targeting limited/experimental", "HDR not confirmed"],
     highlight: "Best free tier (66 daily credits) with strong motion control",
+    detailed: modelDetails.kling,
     youtubeIds: ["XD_7FNPhZQY", "krOgBXl1cKw", "FGRvymY_9tY"],
     youtubeTitles: ["Kling 3.0 — Everyone a Director", "Kling 2.6 — Synced Audio", "Kling 2.5 — Cinematic Quality"],
   },
@@ -141,6 +207,7 @@ export const models: ModelData[] = [
     availability: "Regional: US, Canada, Japan, South Korea, Taiwan, Thailand, Vietnam, Argentina, Mexico, Chile, Colombia",
     limitations: ["Not globally available \u2014 regional restrictions", "Physics simulation has occasional artifacts", "Character consistency drifts in complex scenes", "Text rendering ~80% accurate for simple words", "Watermark on all videos (C2PA metadata)"],
     highlight: "Disney partnership (200+ characters) & best audio sync",
+    detailed: modelDetails.sora,
     localVideos: [
       { src: `${VIDEO_CDN}/sora-1.mp4`, title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
       { src: `${VIDEO_CDN}/sora-2.mp4`, title: "The Global Recall — AI Found Footage" },
@@ -159,6 +226,7 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["End frame experimental/limited", "Multi-image composition limited", "HDR not confirmed for production"],
     highlight: "Best image-to-video quality & widest aspect ratio support",
+    detailed: modelDetails.luma,
     youtubeIds: ["w7ZCcWsx5bU", "ALaZRpmgCbo", "oxBaihKTiLE"],
     youtubeTitles: ["Introducing Ray3.14", "VFX with Ray 3.14 Modify", "Ray3 Modify Walkthrough"],
   },
@@ -173,6 +241,7 @@ export const models: ModelData[] = [
     availability: "Global (open source)",
     limitations: ["Low native resolution (768\u00d7512)", "No 4K upscaling", "5-second max clip length", "Not highest realism \u2014 trade-off for speed"],
     highlight: "Fastest open-source model, runs on consumer GPUs",
+    detailed: modelDetails.ltx,
     youtubeIds: ["KRJW3yXwJdY", "nKeCnvsYN3c"],
     youtubeTitles: ["Introducing LTX-2", "LTX-2 Video Models Explained"],
   },
@@ -187,6 +256,7 @@ export const models: ModelData[] = [
     availability: "Web, iOS, Android, API integrations",
     limitations: ["Short clip durations", "4K limited to 5 seconds", "Pro Max required for multi-character & 4K", "Some generation artifacts"],
     highlight: "Multi-character LoRA system & native 4K (first in industry)",
+    detailed: modelDetails.pixverse,
     localVideos: [
       { src: `${VIDEO_CDN}/pixverse-1.mp4`, title: "PixVerse V5.6 is Officially LIVE!" },
       { src: `${VIDEO_CDN}/pixverse-2.mp4`, title: "PixVerse V5 Transition Reel" },
@@ -203,6 +273,7 @@ export const models: ModelData[] = [
     availability: "Website, mobile apps, third-party integrations",
     limitations: ["Short clip duration", "Last-frame conditioning only in legacy Hailuo 02", "Reduced keyframe functionality in newer versions"],
     highlight: "Media Agent conversational creation & 2D illustration animation",
+    detailed: modelDetails.minimax,
     localVideos: [
       { src: `${VIDEO_CDN}/minimax-1.mp4`, title: "Hailuo 2.3 — Motion & Emotion" },
       { src: `${VIDEO_CDN}/minimax-2.mp4`, title: "Upload Photo to Generate Video" },
@@ -221,6 +292,7 @@ export const models: ModelData[] = [
     availability: "Open source, Tencent Cloud API (testing), third-party platforms",
     limitations: ["High VRAM requirements (24\u201345 GB)", "1080p requires super-resolution step", "Complex setup without platform integration", "10s max clip duration (v1.5)"],
     highlight: "Largest open-source model (8.3B params) with full pipeline",
+    detailed: modelDetails.hunyuan,
     localVideos: [
       { src: `${VIDEO_CDN}/hunyuan-1.mp4`, title: "HunyuanVideo 1.5 — Open-Sourced!" },
     ],
@@ -236,6 +308,7 @@ export const models: ModelData[] = [
     availability: "Alibaba Cloud ecosystem",
     limitations: ["Less creative/artistic than competitors", "Limited end frame targeting", "No advanced inpainting", "Not a true multi-ingredient system", "Template-based approach"],
     highlight: "Best for e-commerce & product video generation",
+    detailed: modelDetails.wan,
     youtubeIds: ["moFwdfQOGMM", "Y9q5p2M6kQk", "uV5wdDG7ngE"],
     youtubeTitles: ["Wan 2.6 — Multishot Clips", "Cinematic AI Videos", "15s Scenes From One Prompt"],
   },
@@ -250,6 +323,7 @@ export const models: ModelData[] = [
     availability: "Via ByteDance platforms (TikTok/CapCut ecosystem)",
     limitations: ["Slow processing (up to 10 min HQ)", "ByteDance ecosystem dependency", "Some features Pro-exclusive"],
     highlight: "Best keyframe interpolation quality (ByteDance/TikTok infrastructure)",
+    detailed: modelDetails.seedance,
     youtubeIds: ["0XbXMXOGLKs", "ACBJfGiC66A"],
     youtubeTitles: ["Seedance 1.0 — Dance Generation", "Seedance Demo Reel"],
   },
