@@ -87,7 +87,11 @@ function HeroPanel() {
           transition={{ delay: 0.4, duration: 0.8, type: "spring", stiffness: 50 }}
           className="glow-text font-hero mb-6 max-w-5xl text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl lg:text-[5.5rem]"
         >
-          11 AI Video Models.{" "}
+          <span className="glitch-wrapper">
+            <span className="glitch-text" data-text="11 AI Video Models.">
+              11 AI Video Models.
+            </span>
+          </span>{" "}
           <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             One Cinematic Reel.
           </span>
