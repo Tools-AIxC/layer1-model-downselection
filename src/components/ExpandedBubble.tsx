@@ -100,6 +100,52 @@ function CardContent({ model, onClose }: { model: ModelData; onClose: () => void
         </p>
       </div>
 
+      {/* Demo Videos */}
+      {((model.youtubeIds?.length ?? 0) > 0 || (model.localVideos?.length ?? 0) > 0) && (
+        <>
+          <h3 className="sketchy-underline mb-3 inline-block text-xs font-bold uppercase tracking-wider text-gray-500">
+            Demo Videos
+          </h3>
+          <div className="mb-4 space-y-3">
+            {model.youtubeIds?.map((id, i) => (
+              <div key={id} className="overflow-hidden rounded-2xl border border-gray-100 bg-black">
+                <div className="aspect-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`}
+                    title={model.youtubeTitles?.[i] ?? `Video ${i + 1}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    className="h-full w-full border-none"
+                  />
+                </div>
+                <p className="truncate px-3 py-2 text-xs text-gray-400">
+                  {model.youtubeTitles?.[i] ?? `Video ${i + 1}`}
+                </p>
+              </div>
+            ))}
+            {model.localVideos?.map((vid) => (
+              <div key={vid.src} className="overflow-hidden rounded-2xl border border-gray-100 bg-black">
+                <div className="aspect-video">
+                  <video
+                    src={vid.src}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    muted
+                    loop
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <p className="truncate px-3 py-2 text-xs text-gray-400">
+                  {vid.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
       <div className="wavy-sep mb-4" />
 
       {/* Specs */}

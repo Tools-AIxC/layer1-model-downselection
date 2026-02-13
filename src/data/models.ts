@@ -37,6 +37,9 @@ export interface ModelData {
   availability: string;
   limitations: string[];
   highlight: string;
+  youtubeIds?: string[];
+  youtubeTitles?: string[];
+  localVideos?: { src: string; title: string }[];
 }
 
 /* Pastel garden palette for tiers */
@@ -94,6 +97,8 @@ export const models: ModelData[] = [
     availability: "Global via Google platforms",
     limitations: ["Premium pricing", "Ecosystem lock-in"],
     highlight: "Highest resolution (4K) & longest sequences (140s)",
+    youtubeIds: ["B78BJuPxmBU", "ZFh6gVarloc", "eNe4UZ3XGeo"],
+    youtubeTitles: ["Veo 3.1 — Artistic Control in Flow", "Veo 3.1 — Frames to Video", "NanoBanana Short Film"],
   },
   {
     id: "runway", name: "Runway", version: "4.5", company: "Runway AI", country: "USA",
@@ -106,6 +111,8 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["10s max clip length", "Credit-based system"],
     highlight: "Best cinematic controls for professional filmmakers",
+    youtubeIds: ["AwKSrJFvdps", "I4DXMWWSDeM"],
+    youtubeTitles: ["Gen-4.5 Image to Video", "Move with Gen-4.5"],
   },
   {
     id: "kling", name: "Kling", version: "3.0 / 2.6 / 2.5", company: "Kuaishou Technology", country: "China",
@@ -118,6 +125,8 @@ export const models: ModelData[] = [
     availability: "Global access",
     limitations: ["End-frame targeting limited/experimental", "HDR not confirmed"],
     highlight: "Best free tier (66 daily credits) with strong motion control",
+    youtubeIds: ["XD_7FNPhZQY", "krOgBXl1cKw", "FGRvymY_9tY"],
+    youtubeTitles: ["Kling 3.0 — Everyone a Director", "Kling 2.6 — Synced Audio", "Kling 2.5 — Cinematic Quality"],
   },
   {
     id: "sora", name: "Sora", version: "2", company: "OpenAI", country: "USA",
@@ -130,6 +139,12 @@ export const models: ModelData[] = [
     availability: "Regional: US, Canada, Japan, South Korea, Taiwan, Thailand, Vietnam, Argentina, Mexico, Chile, Colombia",
     limitations: ["Not globally available \u2014 regional restrictions", "Physics simulation has occasional artifacts", "Character consistency drifts in complex scenes", "Text rendering ~80% accurate for simple words", "Watermark on all videos (C2PA metadata)"],
     highlight: "Disney partnership (200+ characters) & best audio sync",
+    localVideos: [
+      { src: "/videos/sora-1.mp4", title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
+      { src: "/videos/sora-2.mp4", title: "The Global Recall — AI Found Footage" },
+      { src: "/videos/sora-3.mp4", title: "Sora 2 HD vs Veo 3.1 Fast" },
+      { src: "/videos/sora-4.webm", title: "Sora 2 Demo Reel" },
+    ],
   },
   {
     id: "luma", name: "Luma Ray", version: "3.14 / Modify Video", company: "Luma AI (Luma Labs)", country: "USA",
@@ -142,6 +157,8 @@ export const models: ModelData[] = [
     availability: "Global",
     limitations: ["End frame experimental/limited", "Multi-image composition limited", "HDR not confirmed for production"],
     highlight: "Best image-to-video quality & widest aspect ratio support",
+    youtubeIds: ["w7ZCcWsx5bU", "ALaZRpmgCbo", "oxBaihKTiLE"],
+    youtubeTitles: ["Introducing Ray3.14", "VFX with Ray 3.14 Modify", "Ray3 Modify Walkthrough"],
   },
   {
     id: "ltx", name: "LTX Pro", version: "1.0", company: "Lightricks", country: "Israel",
@@ -154,6 +171,8 @@ export const models: ModelData[] = [
     availability: "Global (open source)",
     limitations: ["Low native resolution (768\u00d7512)", "No 4K upscaling", "5-second max clip length", "Not highest realism \u2014 trade-off for speed"],
     highlight: "Fastest open-source model, runs on consumer GPUs",
+    youtubeIds: ["KRJW3yXwJdY", "nKeCnvsYN3c"],
+    youtubeTitles: ["Introducing LTX-2", "LTX-2 Video Models Explained"],
   },
   {
     id: "pixverse", name: "Pixverse", version: "V5.6", company: "PixVerse", country: "USA",
@@ -166,6 +185,10 @@ export const models: ModelData[] = [
     availability: "Web, iOS, Android, API integrations",
     limitations: ["Short clip durations", "4K limited to 5 seconds", "Pro Max required for multi-character & 4K", "Some generation artifacts"],
     highlight: "Multi-character LoRA system & native 4K (first in industry)",
+    localVideos: [
+      { src: "/videos/pixverse-1.mp4", title: "PixVerse V5.6 is Officially LIVE!" },
+      { src: "/videos/pixverse-2.mp4", title: "PixVerse V5 Transition Reel" },
+    ],
   },
   {
     id: "minimax", name: "MiniMax Hailuo", version: "2.3 / I2V-01-Live", company: "MiniMax", country: "China",
@@ -178,6 +201,12 @@ export const models: ModelData[] = [
     availability: "Website, mobile apps, third-party integrations",
     limitations: ["Short clip duration", "Last-frame conditioning only in legacy Hailuo 02", "Reduced keyframe functionality in newer versions"],
     highlight: "Media Agent conversational creation & 2D illustration animation",
+    localVideos: [
+      { src: "/videos/minimax-1.mp4", title: "Hailuo 2.3 — Motion & Emotion" },
+      { src: "/videos/minimax-2.mp4", title: "Upload Photo to Generate Video" },
+      { src: "/videos/minimax-3.mp4", title: "A Masked Man — Physics Demo" },
+      { src: "/videos/minimax-4.mp4", title: "Introducing Hailuo 2.3 & 2.3 Fast" },
+    ],
   },
   {
     id: "hunyuan", name: "Tencent Hunyuan", version: "1.5", company: "Tencent", country: "China",
@@ -190,6 +219,9 @@ export const models: ModelData[] = [
     availability: "Open source, Tencent Cloud API (testing), third-party platforms",
     limitations: ["High VRAM requirements (24\u201345 GB)", "1080p requires super-resolution step", "Complex setup without platform integration", "10s max clip duration (v1.5)"],
     highlight: "Largest open-source model (8.3B params) with full pipeline",
+    localVideos: [
+      { src: "/videos/hunyuan-1.mp4", title: "HunyuanVideo 1.5 — Open-Sourced!" },
+    ],
   },
   {
     id: "wan", name: "Wan", version: "2.6", company: "Alibaba Cloud (Tongyi)", country: "China",
@@ -202,6 +234,8 @@ export const models: ModelData[] = [
     availability: "Alibaba Cloud ecosystem",
     limitations: ["Less creative/artistic than competitors", "Limited end frame targeting", "No advanced inpainting", "Not a true multi-ingredient system", "Template-based approach"],
     highlight: "Best for e-commerce & product video generation",
+    youtubeIds: ["moFwdfQOGMM", "Y9q5p2M6kQk", "uV5wdDG7ngE"],
+    youtubeTitles: ["Wan 2.6 — Multishot Clips", "Cinematic AI Videos", "15s Scenes From One Prompt"],
   },
   {
     id: "seedance", name: "Seedance Pro", version: "1.5", company: "ByteDance", country: "China",
@@ -214,5 +248,7 @@ export const models: ModelData[] = [
     availability: "Via ByteDance platforms (TikTok/CapCut ecosystem)",
     limitations: ["Slow processing (up to 10 min HQ)", "ByteDance ecosystem dependency", "Some features Pro-exclusive"],
     highlight: "Best keyframe interpolation quality (ByteDance/TikTok infrastructure)",
+    youtubeIds: ["0XbXMXOGLKs", "ACBJfGiC66A"],
+    youtubeTitles: ["Seedance 1.0 — Dance Generation", "Seedance Demo Reel"],
   },
 ];
