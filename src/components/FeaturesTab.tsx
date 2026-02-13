@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Zap, Sparkles } from "lucide-react";
 import { type ModelData } from "@/data/models";
+import { DetailSection, DetailSubsection, ContentSubsections } from "./DetailBullets";
 
 export default function FeaturesTab({ model }: { model: ModelData }) {
   return (
@@ -82,6 +83,86 @@ export default function FeaturesTab({ model }: { model: ModelData }) {
           </ul>
         </div>
       </div>
+
+      {/* ── Detailed Feature Sections (verbatim) ── */}
+      {model.detailed && (
+        <div className="mx-auto max-w-5xl space-y-4">
+          <div className="hud-bar rounded" />
+
+          <DetailSection title="Text to Video" accent="var(--color-accent-teal)">
+            <DetailSubsection title="" items={model.detailed.features.textToVideo} />
+          </DetailSection>
+
+          <DetailSection title="Keyframe Support (Startframe + Endframe)" accent="var(--color-accent-amber)">
+            <DetailSubsection title="" items={model.detailed.features.keyframeSupport} />
+          </DetailSection>
+
+          {model.detailed.features.ingredientsToVideo.length > 0 && (
+            <DetailSection title="'Ingredients' to Video">
+              <DetailSubsection title="" items={model.detailed.features.ingredientsToVideo} />
+            </DetailSection>
+          )}
+
+          {model.detailed.features.videoEditing.length > 0 && (
+            <DetailSection title="Video Editing">
+              <DetailSubsection title="" items={model.detailed.features.videoEditing} />
+            </DetailSection>
+          )}
+
+          <ContentSubsections sections={model.detailed.features.additionalSections} />
+
+          {/* Further Info — feature-adjacent sections */}
+          {model.detailed.furtherInfo.cameraControl && model.detailed.furtherInfo.cameraControl.length > 0 && (
+            <DetailSection title="Camera Control">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.cameraControl} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.physicsAndMotion && model.detailed.furtherInfo.physicsAndMotion.length > 0 && (
+            <DetailSection title="Physics & Motion">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.physicsAndMotion} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.characterFeatures && model.detailed.furtherInfo.characterFeatures.length > 0 && (
+            <DetailSection title="Character Features">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.characterFeatures} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.audioFeatures && model.detailed.furtherInfo.audioFeatures.length > 0 && (
+            <DetailSection title="Audio Features">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.audioFeatures} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.safetyProvenance && model.detailed.furtherInfo.safetyProvenance.length > 0 && (
+            <DetailSection title="Safety & Provenance">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.safetyProvenance} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.architectureTraining && model.detailed.furtherInfo.architectureTraining.length > 0 && (
+            <DetailSection title="Architecture & Training">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.architectureTraining} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.dataAndTraining && model.detailed.furtherInfo.dataAndTraining.length > 0 && (
+            <DetailSection title="Data & Training">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.dataAndTraining} />
+            </DetailSection>
+          )}
+
+          {model.detailed.furtherInfo.videoSuperResolution && model.detailed.furtherInfo.videoSuperResolution.length > 0 && (
+            <DetailSection title="Video Super-Resolution">
+              <DetailSubsection title="" items={model.detailed.furtherInfo.videoSuperResolution} />
+            </DetailSection>
+          )}
+
+          <ContentSubsections sections={model.detailed.furtherInfo.additionalSections} />
+        </div>
+      )}
     </motion.div>
   );
 }

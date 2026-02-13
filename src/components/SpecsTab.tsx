@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { type ModelData } from "@/data/models";
+import { DetailSection, DetailSubsection } from "./DetailBullets";
 
 interface SpecRow {
   label: string;
@@ -76,6 +77,21 @@ export default function SpecsTab({ model }: { model: ModelData }) {
           <BarMetric label="Clip Duration" value={clipScore(model)} color="var(--color-accent-amber)" />
           <BarMetric label="Format Variety" value={Math.min(model.specs.aspectRatios.length / 6, 1)} color="var(--color-accent-indigo)" />
         </div>
+
+        {/* ── Detailed Spec Subsections (verbatim) ── */}
+        {model.detailed && (
+          <div className="mt-6 space-y-4">
+            <div className="hud-bar rounded" />
+            <DetailSection title="Detailed Technical Specifications" accent="var(--color-accent-teal)">
+              <DetailSubsection title="Advertised Resolutions" items={model.detailed.modelInfo.advertisedResolutions} />
+              <DetailSubsection title="Aspect Ratios" items={model.detailed.modelInfo.aspectRatios} />
+              <DetailSubsection title="Maximum Clip Length" items={model.detailed.modelInfo.maxClipLength} />
+              <DetailSubsection title="Colourspace / Bit Depth" items={model.detailed.modelInfo.colourspaceBitDepth ?? []} />
+              <DetailSubsection title="Processing Speed" items={model.detailed.modelInfo.processingSpeed ?? []} />
+              <DetailSubsection title="Frame Rate" items={model.detailed.modelInfo.frameRate ?? []} />
+            </DetailSection>
+          </div>
+        )}
       </div>
     </motion.div>
   );

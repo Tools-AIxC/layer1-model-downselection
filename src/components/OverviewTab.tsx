@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, Building2, Calendar, Users, Star, Globe, AlertTriangle } from "lucide-react";
 import { tierConfig, originFlags, type ModelData } from "@/data/models";
 import SpecRadar from "./SpecRadar";
+import { DetailBullets, DetailSection, DetailSubsection, ContentSubsections } from "./DetailBullets";
 
 export default function OverviewTab({ model }: { model: ModelData }) {
   const tier = tierConfig[model.tier];
@@ -162,6 +163,41 @@ export default function OverviewTab({ model }: { model: ModelData }) {
               ))}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* ── Detailed Verbatim Content ── */}
+      {model.detailed && (
+        <div className="lg:col-span-3 space-y-4">
+          <div className="hud-bar rounded" />
+
+          {/* Additional Company Info */}
+          {model.detailed.companyInfo.additionalInfo && model.detailed.companyInfo.additionalInfo.length > 0 && (
+            <DetailSection title="Additional Company Information">
+              <DetailBullets items={model.detailed.companyInfo.additionalInfo.map(t => ({ text: t }))} />
+            </DetailSection>
+          )}
+
+          {/* Advertised Focus */}
+          {model.detailed.modelInfo.advertisedFocus.length > 0 && (
+            <DetailSection title="Advertised Focus / Specialisations" accent="var(--color-accent-teal)">
+              <DetailBullets items={model.detailed.modelInfo.advertisedFocus} />
+            </DetailSection>
+          )}
+
+          {/* Notable Achievements */}
+          {model.detailed.furtherInfo.notableAchievements && model.detailed.furtherInfo.notableAchievements.length > 0 && (
+            <DetailSection title="Notable Achievements" accent="var(--color-accent-amber)">
+              <DetailBullets items={model.detailed.furtherInfo.notableAchievements} />
+            </DetailSection>
+          )}
+
+          {/* Equipment/Footage notes */}
+          {model.detailed.furtherInfo.equipmentFootage && model.detailed.furtherInfo.equipmentFootage.length > 0 && (
+            <DetailSection title="Equipment / Footage">
+              <DetailBullets items={model.detailed.furtherInfo.equipmentFootage} />
+            </DetailSection>
+          )}
         </div>
       )}
     </motion.div>

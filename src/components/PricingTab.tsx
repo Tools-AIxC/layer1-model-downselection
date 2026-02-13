@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Gift, CreditCard, DollarSign, Globe, Server, AlertTriangle } from "lucide-react";
 import { type ModelData } from "@/data/models";
+import { DetailSection, DetailSubsection } from "./DetailBullets";
 
 export default function PricingTab({ model }: { model: ModelData }) {
   return (
@@ -68,6 +69,43 @@ export default function PricingTab({ model }: { model: ModelData }) {
             {model.availability}
           </p>
         </div>
+
+        {/* ── Detailed Pricing & Access (verbatim) ── */}
+        {model.detailed && (
+          <div className="mt-6 space-y-4">
+            <div className="hud-bar rounded" />
+
+            {model.detailed.furtherInfo.pricingModel && model.detailed.furtherInfo.pricingModel.length > 0 && (
+              <DetailSection title="Detailed Pricing Model" accent="var(--color-accent-amber)">
+                <DetailSubsection title="" items={model.detailed.furtherInfo.pricingModel} />
+              </DetailSection>
+            )}
+
+            {model.detailed.furtherInfo.platformAvailability && model.detailed.furtherInfo.platformAvailability.length > 0 && (
+              <DetailSection title="Platform Availability" accent="var(--color-accent-teal)">
+                <DetailSubsection title="" items={model.detailed.furtherInfo.platformAvailability} />
+              </DetailSection>
+            )}
+
+            {model.detailed.furtherInfo.regionalAvailability && model.detailed.furtherInfo.regionalAvailability.length > 0 && (
+              <DetailSection title="Regional Availability">
+                <DetailSubsection title="" items={model.detailed.furtherInfo.regionalAvailability} />
+              </DetailSection>
+            )}
+
+            {model.detailed.furtherInfo.systemRequirements && model.detailed.furtherInfo.systemRequirements.length > 0 && (
+              <DetailSection title="System Requirements">
+                <DetailSubsection title="" items={model.detailed.furtherInfo.systemRequirements} />
+              </DetailSection>
+            )}
+
+            {model.detailed.furtherInfo.limitations && model.detailed.furtherInfo.limitations.length > 0 && (
+              <DetailSection title="Detailed Limitations" accent="var(--color-accent-terra)">
+                <DetailSubsection title="" items={model.detailed.furtherInfo.limitations} />
+              </DetailSection>
+            )}
+          </div>
+        )}
 
         {/* Origin note */}
         {model.country === "China" && (
