@@ -116,6 +116,54 @@ export default function OverviewTab({ model }: { model: ModelData }) {
           </div>
         </div>
       </div>
+
+      {/* Video Showcase — full width */}
+      {((model.youtubeIds?.length ?? 0) > 0 || (model.localVideos?.length ?? 0) > 0) && (
+        <div className="lg:col-span-3">
+          <div className="panel rounded-lg p-5">
+            <h3 className="data-label mb-4">Demo Videos</h3>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {/* YouTube embeds */}
+              {model.youtubeIds?.map((id, i) => (
+                <div key={id} className="overflow-hidden rounded-lg border border-[var(--color-border)] bg-black">
+                  <div className="aspect-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`}
+                      title={model.youtubeTitles?.[i] ?? `Video ${i + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      className="h-full w-full border-none"
+                    />
+                  </div>
+                  <p className="truncate px-3 py-2 text-xs text-[var(--color-ink-muted)]">
+                    {model.youtubeTitles?.[i] ?? `Video ${i + 1}`}
+                  </p>
+                </div>
+              ))}
+              {/* Local video files */}
+              {model.localVideos?.map((vid) => (
+                <div key={vid.src} className="overflow-hidden rounded-lg border border-[var(--color-border)] bg-black">
+                  <div className="aspect-video">
+                    <video
+                      src={vid.src}
+                      controls
+                      preload="metadata"
+                      playsInline
+                      muted
+                      loop
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <p className="truncate px-3 py-2 text-xs text-[var(--color-ink-muted)]">
+                    {vid.title}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

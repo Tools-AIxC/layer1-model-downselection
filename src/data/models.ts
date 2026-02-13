@@ -38,6 +38,9 @@ export interface ModelData {
   limitations: string[];
   highlight: string;
   gridSpan?: string;
+  youtubeIds?: string[];
+  youtubeTitles?: string[];
+  localVideos?: { src: string; title: string }[];
 }
 
 export const tierConfig = {
@@ -110,6 +113,8 @@ export const models: ModelData[] = [
       "Ecosystem lock-in",
     ],
     highlight: "Highest resolution (4K) & longest sequences (140s)",
+    youtubeIds: ["B78BJuPxmBU", "ZFh6gVarloc", "eNe4UZ3XGeo"],
+    youtubeTitles: ["Veo 3.1 — Artistic Control in Flow", "Veo 3.1 — Frames to Video", "NanoBanana Short Film"],
     gridSpan: "col-span-2",
   },
   {
@@ -153,6 +158,8 @@ export const models: ModelData[] = [
       "Credit-based system",
     ],
     highlight: "Best cinematic controls for professional filmmakers",
+    youtubeIds: ["AwKSrJFvdps", "I4DXMWWSDeM"],
+    youtubeTitles: ["Gen-4.5 Image to Video", "Move with Gen-4.5"],
     gridSpan: "col-span-2",
   },
   {
@@ -197,6 +204,8 @@ export const models: ModelData[] = [
       "HDR not confirmed",
     ],
     highlight: "Best free tier (66 daily credits) with strong motion control",
+    youtubeIds: ["XD_7FNPhZQY", "krOgBXl1cKw", "FGRvymY_9tY"],
+    youtubeTitles: ["Kling 3.0 — Everyone a Director", "Kling 2.6 — Synced Audio", "Kling 2.5 — Cinematic Quality"],
   },
   {
     id: "sora",
@@ -249,6 +258,12 @@ export const models: ModelData[] = [
       "Watermark on all videos (C2PA metadata)",
     ],
     highlight: "Disney partnership (200+ characters) & best audio sync",
+    localVideos: [
+      { src: "/videos/sora-1.mp4", title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
+      { src: "/videos/sora-2.mp4", title: "The Global Recall — AI Found Footage" },
+      { src: "/videos/sora-3.mp4", title: "Sora 2 HD vs Veo 3.1 Fast" },
+      { src: "/videos/sora-4.webm", title: "Sora 2 Demo Reel" },
+    ],
     gridSpan: "col-span-2",
   },
   {
@@ -295,6 +310,8 @@ export const models: ModelData[] = [
       "HDR not confirmed for production",
     ],
     highlight: "Best image-to-video quality & widest aspect ratio support",
+    youtubeIds: ["w7ZCcWsx5bU", "ALaZRpmgCbo", "oxBaihKTiLE"],
+    youtubeTitles: ["Introducing Ray3.14", "VFX with Ray 3.14 Modify", "Ray3 Modify Walkthrough"],
   },
   {
     id: "ltx",
@@ -340,6 +357,8 @@ export const models: ModelData[] = [
       "Not highest realism — trade-off for speed",
     ],
     highlight: "Fastest open-source model, runs on consumer GPUs",
+    youtubeIds: ["KRJW3yXwJdY", "nKeCnvsYN3c"],
+    youtubeTitles: ["Introducing LTX-2", "LTX-2 Video Models Explained"],
   },
   {
     id: "pixverse",
@@ -386,6 +405,10 @@ export const models: ModelData[] = [
       "Some generation artifacts",
     ],
     highlight: "Multi-character LoRA system & native 4K (first in industry)",
+    localVideos: [
+      { src: "/videos/pixverse-1.mp4", title: "PixVerse V5.6 is Officially LIVE!" },
+      { src: "/videos/pixverse-2.mp4", title: "PixVerse V5 Transition Reel" },
+    ],
   },
   {
     id: "minimax",
@@ -430,6 +453,12 @@ export const models: ModelData[] = [
       "Reduced keyframe functionality in newer versions",
     ],
     highlight: "Media Agent conversational creation & 2D illustration animation",
+    localVideos: [
+      { src: "/videos/minimax-1.mp4", title: "Hailuo 2.3 — Motion & Emotion" },
+      { src: "/videos/minimax-2.mp4", title: "Upload Photo to Generate Video" },
+      { src: "/videos/minimax-3.mp4", title: "A Masked Man — Physics Demo" },
+      { src: "/videos/minimax-4.mp4", title: "Introducing Hailuo 2.3 & 2.3 Fast" },
+    ],
   },
   {
     id: "hunyuan",
@@ -478,6 +507,9 @@ export const models: ModelData[] = [
       "10s max clip duration (v1.5)",
     ],
     highlight: "Largest open-source model (8.3B params) with full pipeline",
+    localVideos: [
+      { src: "/videos/hunyuan-1.mp4", title: "HunyuanVideo 1.5 — Open-Sourced!" },
+    ],
   },
   {
     id: "wan",
@@ -525,6 +557,8 @@ export const models: ModelData[] = [
       "Template-based approach",
     ],
     highlight: "Best for e-commerce & product video generation",
+    youtubeIds: ["moFwdfQOGMM", "Y9q5p2M6kQk", "uV5wdDG7ngE"],
+    youtubeTitles: ["Wan 2.6 — Multishot Clips", "Cinematic AI Videos", "15s Scenes From One Prompt"],
   },
   {
     id: "seedance",
@@ -571,6 +605,8 @@ export const models: ModelData[] = [
       "Some features Pro-exclusive",
     ],
     highlight: "Best keyframe interpolation quality (ByteDance/TikTok infrastructure)",
+    youtubeIds: ["0XbXMXOGLKs", "ACBJfGiC66A"],
+    youtubeTitles: ["Seedance 1.0 — Dance Generation", "Seedance Demo Reel"],
   },
 ];
 
