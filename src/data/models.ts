@@ -53,8 +53,10 @@ export const originFlags: Record<Origin, string> = {
 };
 
 /* ── Cinematic config per model ── */
+const VIDEO_CDN = "https://github.com/Tools-AIxC/layer1-model-downselection/releases/download/v1.0-videos";
+
 export interface LocalVideo {
-  src: string;     // path relative to public/, e.g. "/videos/sora-1.mp4"
+  src: string;     // full URL to video file hosted on GitHub Releases CDN
   title: string;
 }
 
@@ -96,10 +98,10 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     youtubeIds: [],
     youtubeTitles: [],
     localVideos: [
-      { src: "/videos/sora-1.mp4", title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
-      { src: "/videos/sora-2.mp4", title: "The Global Recall — AI Found Footage" },
-      { src: "/videos/sora-3.mp4", title: "Sora 2 HD vs Veo 3.1 Fast" },
-      { src: "/videos/sora-4.webm", title: "Sora 2 Demo Reel" },
+      { src: `${VIDEO_CDN}/sora-1.mp4`, title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
+      { src: `${VIDEO_CDN}/sora-2.mp4`, title: "The Global Recall — AI Found Footage" },
+      { src: `${VIDEO_CDN}/sora-3.mp4`, title: "Sora 2 HD vs Veo 3.1 Fast" },
+      { src: `${VIDEO_CDN}/sora-4.webm`, title: "Sora 2 Demo Reel" },
     ],
   },
   luma: {
@@ -123,8 +125,8 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     youtubeIds: [],
     youtubeTitles: [],
     localVideos: [
-      { src: "/videos/pixverse-1.mp4", title: "PixVerse V5.6 is Officially LIVE!" },
-      { src: "/videos/pixverse-2.mp4", title: "PixVerse V5 Transition Reel" },
+      { src: `${VIDEO_CDN}/pixverse-1.mp4`, title: "PixVerse V5.6 is Officially LIVE!" },
+      { src: `${VIDEO_CDN}/pixverse-2.mp4`, title: "PixVerse V5 Transition Reel" },
     ],
   },
   minimax: {
@@ -134,10 +136,10 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     youtubeIds: [],
     youtubeTitles: [],
     localVideos: [
-      { src: "/videos/minimax-1.mp4", title: "Hailuo 2.3 — Motion & Emotion" },
-      { src: "/videos/minimax-2.mp4", title: "Upload Photo to Generate Video" },
-      { src: "/videos/minimax-3.mp4", title: "A Masked Man — Physics Demo" },
-      { src: "/videos/minimax-4.mp4", title: "Introducing Hailuo 2.3 & 2.3 Fast" },
+      { src: `${VIDEO_CDN}/minimax-1.mp4`, title: "Hailuo 2.3 — Motion & Emotion" },
+      { src: `${VIDEO_CDN}/minimax-2.mp4`, title: "Upload Photo to Generate Video" },
+      { src: `${VIDEO_CDN}/minimax-3.mp4`, title: "A Masked Man — Physics Demo" },
+      { src: `${VIDEO_CDN}/minimax-4.mp4`, title: "Introducing Hailuo 2.3 & 2.3 Fast" },
     ],
   },
   hunyuan: {
@@ -147,7 +149,7 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     youtubeIds: [],
     youtubeTitles: [],
     localVideos: [
-      { src: "/videos/hunyuan-1.mp4", title: "HunyuanVideo 1.5 — Open-Sourced!" },
+      { src: `${VIDEO_CDN}/hunyuan-1.mp4`, title: "HunyuanVideo 1.5 — Open-Sourced!" },
     ],
   },
   wan: {
