@@ -112,8 +112,9 @@ body {
   border: 1px solid rgba(255,255,255,0.06);
   aspect-ratio: 16/9;
 }
-.yt-frame iframe {
-  width: 100%; height: 100%; border: none;
+.yt-frame iframe,
+.yt-frame video {
+  width: 100%; height: 100%; border: none; object-fit: cover;
 }
 
 /* ── Nav dots ── */
@@ -147,13 +148,12 @@ body {
 .glitch {
   position: relative;
   font-weight: 800;
-  text-transform: uppercase;
-  /* RGB text-shadow using em units so it scales with font size */
+  /* Subtle RGB text-shadow — small offsets so it reads clearly at large sizes */
   text-shadow:
-    0.05em  0       0 rgba(255, 0, 0, 0.75),
-   -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-    0.025em  0.05em 0 rgba(0, 0, 255, 0.75);
-  animation: glitch 650ms infinite;
+    0.02em  0      0 rgba(255, 0, 0, 0.5),
+   -0.01em -0.02em 0 rgba(0, 255, 0, 0.5),
+    0.01em  0.02em 0 rgba(0, 0, 255, 0.5);
+  animation: glitch 725ms infinite;
 }
 
 /* The two extra spans: absolute-positioned on top of main text */
@@ -163,66 +163,67 @@ body {
   left: 0;
 }
 
-/* Top broken slice — angled clip-path + own animation speed */
+/* Top broken slice — tight angled clip, subtle offset */
 .glitch span:first-child {
-  animation: glitch 500ms infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 40%);
-  transform: translate(-0.05em, -0.025em);
-  opacity: 0.8;
+  animation: glitch 600ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 30%);
+  transform: translate(-0.02em, -0.01em);
+  opacity: 0.75;
 }
 
-/* Bottom broken slice — angled clip-path + different speed */
+/* Bottom broken slice — tight angled clip, subtle offset */
 .glitch span:last-child {
-  animation: glitch 400ms infinite;
-  clip-path: polygon(0 60%, 100% 55%, 100% 100%, 0 100%);
-  transform: translate(0.05em, 0.025em);
-  opacity: 0.8;
+  animation: glitch 450ms infinite;
+  clip-path: polygon(0 68%, 100% 65%, 100% 100%, 0 100%);
+  transform: translate(0.02em, 0.01em);
+  opacity: 0.75;
 }
 
 /* Keyframes: discrete jumps (hold → snap → hold → snap)
-   Uneven timing creates organic feel: fast glitch, slow hold, fast again */
+   Uneven timing: fast glitch, slow hold, fast again.
+   Offsets kept intentionally small (0.01–0.02em) for large display text. */
 @keyframes glitch {
   0% {
     text-shadow:
-      0.05em  0       0 rgba(255, 0, 0, 0.75),
-     -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-      0.025em  0.05em 0 rgba(0, 0, 255, 0.75);
+      0.02em  0      0 rgba(255, 0, 0, 0.5),
+     -0.02em -0.01em 0 rgba(0, 255, 0, 0.5),
+      0.01em  0.02em 0 rgba(0, 0, 255, 0.5);
   }
   14% {
     text-shadow:
-      0.05em  0       0 rgba(255, 0, 0, 0.75),
-     -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-      0.025em  0.05em 0 rgba(0, 0, 255, 0.75);
+      0.02em  0      0 rgba(255, 0, 0, 0.5),
+     -0.02em -0.01em 0 rgba(0, 255, 0, 0.5),
+      0.01em  0.02em 0 rgba(0, 0, 255, 0.5);
   }
   15% {
     text-shadow:
-     -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-      0.025em  0.025em 0 rgba(0, 255, 0, 0.75),
-     -0.05em -0.05em  0 rgba(0, 0, 255, 0.75);
+     -0.02em -0.01em 0 rgba(255, 0, 0, 0.5),
+      0.01em  0.01em 0 rgba(0, 255, 0, 0.5),
+     -0.02em -0.02em 0 rgba(0, 0, 255, 0.5);
   }
   49% {
     text-shadow:
-     -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-      0.025em  0.025em 0 rgba(0, 255, 0, 0.75),
-     -0.05em -0.05em  0 rgba(0, 0, 255, 0.75);
+     -0.02em -0.01em 0 rgba(255, 0, 0, 0.5),
+      0.01em  0.01em 0 rgba(0, 255, 0, 0.5),
+     -0.02em -0.02em 0 rgba(0, 0, 255, 0.5);
   }
   50% {
     text-shadow:
-      0.025em  0.05em 0 rgba(255, 0, 0, 0.75),
-      0.05em   0      0 rgba(0, 255, 0, 0.75),
-      0       -0.05em 0 rgba(0, 0, 255, 0.75);
+      0.01em  0.02em 0 rgba(255, 0, 0, 0.5),
+      0.02em  0      0 rgba(0, 255, 0, 0.5),
+      0      -0.02em 0 rgba(0, 0, 255, 0.5);
   }
   99% {
     text-shadow:
-      0.025em  0.05em 0 rgba(255, 0, 0, 0.75),
-      0.05em   0      0 rgba(0, 255, 0, 0.75),
-      0       -0.05em 0 rgba(0, 0, 255, 0.75);
+      0.01em  0.02em 0 rgba(255, 0, 0, 0.5),
+      0.02em  0      0 rgba(0, 255, 0, 0.5),
+      0      -0.02em 0 rgba(0, 0, 255, 0.5);
   }
   100% {
     text-shadow:
-     -0.025em 0       0 rgba(255, 0, 0, 0.75),
-     -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-     -0.025em -0.05em  0 rgba(0, 0, 255, 0.75);
+     -0.01em  0      0 rgba(255, 0, 0, 0.5),
+     -0.01em -0.01em 0 rgba(0, 255, 0, 0.5),
+     -0.01em -0.02em 0 rgba(0, 0, 255, 0.5);
   }
 }
 

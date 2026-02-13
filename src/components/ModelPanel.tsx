@@ -31,7 +31,9 @@ export default function ModelPanel({
   const glowX = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.3]);
 
-  const hasVideos = config.youtubeIds.length > 0;
+  const hasYouTube = config.youtubeIds.length > 0;
+  const hasLocal = (config.localVideos?.length ?? 0) > 0;
+  const hasVideos = hasYouTube || hasLocal;
 
   return (
     <div ref={ref} className="h-panel" style={{ background: config.bgGradient }}>
@@ -165,36 +167,82 @@ export default function ModelPanel({
             style={{ x: bgX }}
             className="hidden w-[45%] flex-col justify-center gap-4 pr-12 lg:flex will-change-transform"
           >
-            {/* Primary video — large */}
-            <div className="yt-frame">
-              <iframe
-                src={`https://www.youtube.com/embed/${config.youtubeIds[0]}?rel=0&modestbranding=1`}
-                title={config.youtubeTitles[0]}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
-            <p className="text-xs text-white/20 text-center">{config.youtubeTitles[0]}</p>
+            {/* ── YouTube embeds ── */}
+            {hasYouTube && (
+              <>
+                {/* Primary YouTube — large */}
+                <div className="yt-frame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${config.youtubeIds[0]}?rel=0&modestbranding=1`}
+                    title={config.youtubeTitles[0]}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+                <p className="text-xs text-white/20 text-center">{config.youtubeTitles[0]}</p>
 
-            {/* Secondary videos — smaller row */}
-            {config.youtubeIds.length > 1 && (
-              <div className="grid grid-cols-2 gap-3 mt-2">
-                {config.youtubeIds.slice(1, 3).map((vid, i) => (
-                  <div key={vid}>
-                    <div className="yt-frame">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1`}
-                        title={config.youtubeTitles[i + 1]}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        loading="lazy"
-                      />
-                    </div>
-                    <p className="mt-1 text-[10px] text-white/15 text-center truncate">{config.youtubeTitles[i + 1]}</p>
+                {/* Secondary YouTube — smaller row */}
+                {config.youtubeIds.length > 1 && (
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    {config.youtubeIds.slice(1, 3).map((vid, i) => (
+                      <div key={vid}>
+                        <div className="yt-frame">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1`}
+                            title={config.youtubeTitles[i + 1]}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        </div>
+                        <p className="mt-1 text-[10px] text-white/15 text-center truncate">{config.youtubeTitles[i + 1]}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                )}
+              </>
+            )}
+
+            {/* ── Local video files ── */}
+            {hasLocal && config.localVideos && (
+              <>
+                {/* Primary local video — large */}
+                <div className="yt-frame">
+                  <video
+                    src={config.localVideos[0].src}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    muted
+                    loop
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-xs text-white/20 text-center">{config.localVideos[0].title}</p>
+
+                {/* Secondary local videos — smaller row */}
+                {config.localVideos.length > 1 && (
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    {config.localVideos.slice(1, 3).map((vid) => (
+                      <div key={vid.src}>
+                        <div className="yt-frame">
+                          <video
+                            src={vid.src}
+                            controls
+                            preload="metadata"
+                            playsInline
+                            muted
+                            loop
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <p className="mt-1 text-[10px] text-white/15 text-center truncate">{vid.title}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </motion.div>
         )}

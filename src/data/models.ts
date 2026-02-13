@@ -53,12 +53,18 @@ export const originFlags: Record<Origin, string> = {
 };
 
 /* ── Cinematic config per model ── */
+export interface LocalVideo {
+  src: string;     // path relative to public/, e.g. "/videos/sora-1.mp4"
+  title: string;
+}
+
 export interface CinematicConfig {
   bgGradient: string;
   accentGlow: string;
   tagline: string;
   youtubeIds: string[];       // YouTube video IDs from Miro board
   youtubeTitles: string[];    // titles for the videos
+  localVideos?: LocalVideo[]; // direct video files (for models without YouTube embeds)
 }
 
 export const cinematicConfig: Record<string, CinematicConfig> = {
@@ -89,6 +95,12 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     tagline: "Disney's Co-Pilot",
     youtubeIds: [],
     youtubeTitles: [],
+    localVideos: [
+      { src: "/videos/sora-1.mp4", title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
+      { src: "/videos/sora-2.mp4", title: "The Global Recall — AI Found Footage" },
+      { src: "/videos/sora-3.mp4", title: "Sora 2 HD vs Veo 3.1 Fast" },
+      { src: "/videos/sora-4.webm", title: "Sora 2 Demo Reel" },
+    ],
   },
   luma: {
     bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #0a1a2e 50%, #051422 100%)",
@@ -110,6 +122,10 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     tagline: "Multi-Character Maestro",
     youtubeIds: [],
     youtubeTitles: [],
+    localVideos: [
+      { src: "/videos/pixverse-1.mp4", title: "PixVerse V5.6 is Officially LIVE!" },
+      { src: "/videos/pixverse-2.mp4", title: "PixVerse V5 Transition Reel" },
+    ],
   },
   minimax: {
     bgGradient: "linear-gradient(135deg, #0a0f1e 0%, #141e32 50%, #0a1422 100%)",
@@ -117,6 +133,12 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     tagline: "The Conversationalist",
     youtubeIds: [],
     youtubeTitles: [],
+    localVideos: [
+      { src: "/videos/minimax-1.mp4", title: "Hailuo 2.3 — Motion & Emotion" },
+      { src: "/videos/minimax-2.mp4", title: "Upload Photo to Generate Video" },
+      { src: "/videos/minimax-3.mp4", title: "A Masked Man — Physics Demo" },
+      { src: "/videos/minimax-4.mp4", title: "Introducing Hailuo 2.3 & 2.3 Fast" },
+    ],
   },
   hunyuan: {
     bgGradient: "linear-gradient(135deg, #0f1a0a 0%, #0a1e14 50%, #071410 100%)",
@@ -124,6 +146,9 @@ export const cinematicConfig: Record<string, CinematicConfig> = {
     tagline: "Open-Source Giant",
     youtubeIds: [],
     youtubeTitles: [],
+    localVideos: [
+      { src: "/videos/hunyuan-1.mp4", title: "HunyuanVideo 1.5 — Open-Sourced!" },
+    ],
   },
   wan: {
     bgGradient: "linear-gradient(135deg, #1a0a14 0%, #1e0a1e 50%, #140a14 100%)",
