@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import Bubble from "@/components/Bubble";
 import ExpandedBubble from "@/components/ExpandedBubble";
 import ConnectionLines from "@/components/ConnectionLines";
@@ -16,7 +16,6 @@ const MAX_SCALE = 1.6;
 
 export default function Home() {
   const [expanded, setExpanded] = useState<{ model: ModelData; pos: BubblePosition } | null>(null);
-  const [viewSize, setViewSize] = useState({ w: 1200, h: 800 });
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -25,16 +24,6 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const lastMouse = useRef({ x: 0, y: 0 });
-
-  // Track viewport size
-  useEffect(() => {
-    function update() {
-      setViewSize({ w: window.innerWidth, h: window.innerHeight });
-    }
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
 
   // Center canvas initially
   useEffect(() => {
@@ -130,10 +119,9 @@ export default function Home() {
 
       {/* Mini Map */}
       <MiniMap
-        viewX={x.get()}
-        viewY={y.get()}
-        viewW={viewSize.w / scale.get()}
-        viewH={viewSize.h / scale.get()}
+        motionX={x}
+        motionY={y}
+        motionScale={scale}
       />
 
       {/* Expanded Bubble Overlay */}
