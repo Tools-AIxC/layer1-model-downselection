@@ -144,9 +144,10 @@ body {
 
 /* ═══ GLITCH TEXT EFFECT (broken-text technique) ═══ */
 
-/* Main text container — relative so spans stack inside */
+/* Main text container — inline-block + relative so spans stack inside */
 .glitch {
   position: relative;
+  display: inline-block;
   font-weight: 800;
   /* Subtle RGB text-shadow — small offsets so it reads clearly at large sizes */
   text-shadow:
