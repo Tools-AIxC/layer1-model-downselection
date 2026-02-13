@@ -42,6 +42,8 @@ export interface ModelData {
   localVideos?: { src: string; title: string }[];
 }
 
+const VIDEO_CDN = "https://github.com/Tools-AIxC/layer1-model-downselection/releases/download/v1.0-videos";
+
 /* Pastel garden palette for tiers */
 export const tierConfig: Record<Tier, { label: string; pastel: string; accent: string; emoji: string }> = {
   tier1: { label: "Must Try", pastel: "#d1fae5", accent: "#059669", emoji: "\u{1F33F}" },
@@ -140,10 +142,10 @@ export const models: ModelData[] = [
     limitations: ["Not globally available \u2014 regional restrictions", "Physics simulation has occasional artifacts", "Character consistency drifts in complex scenes", "Text rendering ~80% accurate for simple words", "Watermark on all videos (C2PA metadata)"],
     highlight: "Disney partnership (200+ characters) & best audio sync",
     localVideos: [
-      { src: "/videos/sora-1.mp4", title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
-      { src: "/videos/sora-2.mp4", title: "The Global Recall — AI Found Footage" },
-      { src: "/videos/sora-3.mp4", title: "Sora 2 HD vs Veo 3.1 Fast" },
-      { src: "/videos/sora-4.webm", title: "Sora 2 Demo Reel" },
+      { src: `${VIDEO_CDN}/sora-1.mp4`, title: "Grandma vs Cat 2 — Ultra-Realistic AI Footage" },
+      { src: `${VIDEO_CDN}/sora-2.mp4`, title: "The Global Recall — AI Found Footage" },
+      { src: `${VIDEO_CDN}/sora-3.mp4`, title: "Sora 2 HD vs Veo 3.1 Fast" },
+      { src: `${VIDEO_CDN}/sora-4.webm`, title: "Sora 2 Demo Reel" },
     ],
   },
   {
@@ -186,8 +188,8 @@ export const models: ModelData[] = [
     limitations: ["Short clip durations", "4K limited to 5 seconds", "Pro Max required for multi-character & 4K", "Some generation artifacts"],
     highlight: "Multi-character LoRA system & native 4K (first in industry)",
     localVideos: [
-      { src: "/videos/pixverse-1.mp4", title: "PixVerse V5.6 is Officially LIVE!" },
-      { src: "/videos/pixverse-2.mp4", title: "PixVerse V5 Transition Reel" },
+      { src: `${VIDEO_CDN}/pixverse-1.mp4`, title: "PixVerse V5.6 is Officially LIVE!" },
+      { src: `${VIDEO_CDN}/pixverse-2.mp4`, title: "PixVerse V5 Transition Reel" },
     ],
   },
   {
@@ -202,10 +204,10 @@ export const models: ModelData[] = [
     limitations: ["Short clip duration", "Last-frame conditioning only in legacy Hailuo 02", "Reduced keyframe functionality in newer versions"],
     highlight: "Media Agent conversational creation & 2D illustration animation",
     localVideos: [
-      { src: "/videos/minimax-1.mp4", title: "Hailuo 2.3 — Motion & Emotion" },
-      { src: "/videos/minimax-2.mp4", title: "Upload Photo to Generate Video" },
-      { src: "/videos/minimax-3.mp4", title: "A Masked Man — Physics Demo" },
-      { src: "/videos/minimax-4.mp4", title: "Introducing Hailuo 2.3 & 2.3 Fast" },
+      { src: `${VIDEO_CDN}/minimax-1.mp4`, title: "Hailuo 2.3 — Motion & Emotion" },
+      { src: `${VIDEO_CDN}/minimax-2.mp4`, title: "Upload Photo to Generate Video" },
+      { src: `${VIDEO_CDN}/minimax-3.mp4`, title: "A Masked Man — Physics Demo" },
+      { src: `${VIDEO_CDN}/minimax-4.mp4`, title: "Introducing Hailuo 2.3 & 2.3 Fast" },
     ],
   },
   {
@@ -220,7 +222,7 @@ export const models: ModelData[] = [
     limitations: ["High VRAM requirements (24\u201345 GB)", "1080p requires super-resolution step", "Complex setup without platform integration", "10s max clip duration (v1.5)"],
     highlight: "Largest open-source model (8.3B params) with full pipeline",
     localVideos: [
-      { src: "/videos/hunyuan-1.mp4", title: "HunyuanVideo 1.5 — Open-Sourced!" },
+      { src: `${VIDEO_CDN}/hunyuan-1.mp4`, title: "HunyuanVideo 1.5 — Open-Sourced!" },
     ],
   },
   {
